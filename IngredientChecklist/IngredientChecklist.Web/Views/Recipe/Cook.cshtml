@@ -1,0 +1,67 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-content">
+    <div class="page-body" ng-controller="cookController">
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="widget">
+                    <div class="widget-header ">
+                        @*<span class="widget-caption">Recipe's Ingredient checklist</span>*@
+                        <br />
+                    </div>
+                    <div class="widget-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <select class="form-control" ng-change="recipeSelected()" required ng-model="recipeId" ng-options="r.Id as r.Name for r in listRecipe">
+                                        <option value="">Select Recipe</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="pull-right">
+                                        <input type="button" class="btn btn-primary" value="Reset Checklist" ng-click="resetIngredientSelection()" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Ingredient Name
+                                    </th>
+                                    <th>
+                                        Checked?
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-ng-repeat="ing in listIngredients">
+                                    <td>
+                                        {{ing.Name}}
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input class="checkbox-slider slider-icon yesno" ng-click="toggleIngredientSelection($event,ing.Id)" type="checkbox" ng-model="ing.IsChecked">
+                                            <span class="text"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <script src="~/Scripts/Recipe/Cook.js"></script>
+}
+
